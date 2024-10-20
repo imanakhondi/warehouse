@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+
+    &,
+    &.light-mode {
+      --background-app-rgb: 240, 242, 245;
+      --color-primary-900: 44, 58, 150; /* دکمه‌ها (Add Product) */
+      --color-primary-800: 0, 184, 121; /* آیکون ویرایش */
+      --color-primary-700: 226, 62, 87; /* آیکون حذف */
+      --color-primary-600: 110, 68, 255; /* آیکون مشاهده */
+      --color-primary-500: 233, 236, 241; /* نوار جستجو */
+      --color-secondary-900: 255, 255, 255; /* متن‌ها و پس‌زمینه سفید */
+      --color-secondary-800: 73, 86, 153; /* رنگ دکمه‌های اضافه */
+      --color-success: 0, 184, 121; /* آیکون ویرایش سبز */
+      --color-warning: 255, 193, 7; /* هشدار */
+      --color-error: 226, 62, 87; /* آیکون حذف قرمز */
+      --color-info: 110, 68, 255; /* آیکون مشاهده بنفش */
+    }
+
+    &.dark-mode {
+      --background-app-rgb: 28, 28, 30;
+      --color-primary-900: 74, 86, 226; /* دکمه‌ها (Add Product) */
+      --color-primary-800: 52, 199, 89; /* آیکون ویرایش */
+      --color-primary-700: 255, 69, 58; /* آیکون حذف */
+      --color-primary-600: 191, 90, 242; /* آیکون مشاهده */
+      --color-primary-500: 44, 46, 48; /* نوار جستجو */
+      --color-secondary-900: 255, 255, 255; /* متن‌ها در حالت دارک */
+      --color-secondary-800: 72, 80, 90; /* رنگ دکمه‌های اضافه در حالت دارک */
+      --color-success: 52, 199, 89; /* آیکون ویرایش سبز */
+      --color-warning: 255, 193, 7; /* هشدار */
+      --color-error: 255, 69, 58; /* آیکون حذف قرمز */
+      --color-info: 191, 90, 242; /* آیکون مشاهده بنفش */
+    }
+
+  }
+}
+
+@layer components {
+  .textField__input {
+    @apply w-full px-4 py-3 rounded-xl text-secondary-900 border border-secondary-100 bg-secondary-100 hover:border-primary-500 focus:border-primary-500 focus:bg-secondary-0 transition-all duration-300 ease-out focus:shadow-lg focus:shadow-primary-200 dark:focus:shadow-secondary-200
+  }
+
+  .btn {
+    @apply px-3 py-1 font-bold rounded-xl transition-all duration-300
+  }
+
+  .btn--primary {
+    @apply px-4 py-3 bg-primary-900 text-secondary-100 hover:bg-primary-800 shadow-lg shadow-primary-300
+  }
+
+  .btn--secondary {
+    @apply bg-secondary-600
+  }
+
+  .btn--outline {
+    @apply border border-secondary-700 text-secondary-700;
+  }
+
+  .btn--danger {
+    @apply px-4 py-3 border border-rose-700 text-rose-700;
+  }
+
+  .badge {
+    @apply inline-block whitespace-nowrap rounded-xl px-2 py-0.5;
+  }
+
+  .badge--primary {
+    @apply bg-primary-900 text-white;
+  }
+
+  .badge--secondary {
+    @apply bg-secondary-200 text-secondary-600;
+  }
+
+  .badge--success {
+    @apply bg-green-500 text-white;
+  }
+
+  .badge--danger {
+    @apply bg-red-500 text-white;
+  }
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Vazir";
+  min-height: 100vh;
+  user-select: none;
+  background-color: rgb(var(--background-app-rgb));
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
+
+button:disabled {
+  cursor: default;
+  background-color: rgb(var(--color-secondary-100), 0.5);
+  pointer-events: none;
+  box-shadow: none;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
