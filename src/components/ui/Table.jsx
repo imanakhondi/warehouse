@@ -1,8 +1,6 @@
-import React from "react";
-
 function Table({ children }) {
   return (
-    <div>
+    <div className="overflow-x-auto">
       <table>{children}</table>
     </div>
   );

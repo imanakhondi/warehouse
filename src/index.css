@@ -4,7 +4,6 @@
 
 @layer base {
   :root {
-
     &,
     &.light-mode {
       --background-app-rgb: 240, 242, 245;
@@ -28,32 +27,31 @@
       --color-primary-700: 255, 69, 58; /* آیکون حذف */
       --color-primary-600: 191, 90, 242; /* آیکون مشاهده */
       --color-primary-500: 44, 46, 48; /* نوار جستجو */
-      --color-secondary-900: 255, 255, 255; /* متن‌ها در حالت دارک */
+      --color-secondary-900: 0, 0, 0; /* متن‌ها در حالت دارک */
       --color-secondary-800: 72, 80, 90; /* رنگ دکمه‌های اضافه در حالت دارک */
       --color-success: 52, 199, 89; /* آیکون ویرایش سبز */
       --color-warning: 255, 193, 7; /* هشدار */
       --color-error: 255, 69, 58; /* آیکون حذف قرمز */
       --color-info: 191, 90, 242; /* آیکون مشاهده بنفش */
     }
-
   }
 }
 
 @layer components {
   .textField__input {
-    @apply w-full px-4 py-3 rounded-xl text-secondary-900 border border-secondary-100 bg-secondary-100 hover:border-primary-500 focus:border-primary-500 focus:bg-secondary-0 transition-all duration-300 ease-out focus:shadow-lg focus:shadow-primary-200 dark:focus:shadow-secondary-200
+    @apply w-full px-4 py-3 rounded-xl text-secondary-800 border border-primary-900/50 bg-secondary-100 hover:border-primary-500 focus:border-primary-500 focus:bg-secondary-0 transition-all duration-300 ease-out focus:shadow-lg focus:shadow-primary-900 dark:focus:shadow-secondary-900;
   }
 
   .btn {
-    @apply px-3 py-1 font-bold rounded-xl transition-all duration-300
+    @apply px-3 py-1 font-bold rounded-xl transition-all duration-300;
   }
 
   .btn--primary {
-    @apply px-4 py-3 bg-primary-900 text-secondary-100 hover:bg-primary-800 shadow-lg shadow-primary-300
+    @apply px-4 py-3 bg-primary-900 text-secondary-900  shadow-lg;
   }
 
   .btn--secondary {
-    @apply bg-secondary-600
+    @apply bg-secondary-900 border-2 border-primary-900 text-primary-900;
   }
 
   .btn--outline {
@@ -115,9 +113,37 @@ button:disabled {
   box-shadow: none;
 }
 
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+table .title-row {
+  background-color: rgb(var(--color-secondary-100));
+}
+
+table td,
+table th {
+  border-bottom: 1px solid rgb(var(--background-app-rgb));
+  text-align: left;
+  white-space: nowrap;
+}
+
+table th {
+  padding: 0.6rem 1rem;
+  color: rgb(var(--color-secondary-800)) ;
+  font-size: 0.9rem;
+}
+
+table td {
+  font-size: 0.85rem;
+  padding: 1rem 1rem;
+  color: rgb(var(--color-secondary-800));
 }

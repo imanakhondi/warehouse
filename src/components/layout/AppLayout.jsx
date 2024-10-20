@@ -4,7 +4,7 @@ function AppLayout({ children }) {
   return (
     <div className="h-screen">
       <Header />
-      <div>{children}</div>
+      <div className="container">{children}</div>
     </div>
   );
 }
