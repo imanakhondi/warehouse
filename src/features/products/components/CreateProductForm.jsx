@@ -2,23 +2,16 @@ import { useForm } from "react-hook-form";
 import TextField from "../../../components/form/TextField";
 import Button from "../../../components/form/Button";
 import RHFSelect from "../../../components/form/RHFSelect";
+import { useAppContext } from "../../../context/AppContext";
+import { productActions } from "../../../context/AppActions";
+import toast from "react-hot-toast";
 
-const categoryOption = [
-  {
-    value: "1",
-    label: "Laptop",
-  },
-  {
-    value: "2",
-    label: "mobile",
-  },
-  {
-    value: "3",
-    label: "TV",
-  },
-];
+function CreateProductForm() {
+  const {
+    state: { categoriesState },
+    dispatch,
+  } = useAppContext();
 
-function CreateProductForm({ products, setProducts, categories }) {
   const {
     register,
     handleSubmit,
@@ -26,20 +19,24 @@ function CreateProductForm({ products, setProducts, categories }) {
     reset,
   } = useForm();
 
-  const onSubmit = (formData) => {
-    const newData = {
+  const handleProductSubmission = ({ title, quantity, category }) => {
+    const newProduct = {
       id: Date.now(),
-      title: formData.title,
-      quantity: formData.quantity,
-      category: formData.category,
-      date: new Date().toLocaleDateString("fa-IR"),
+      title,
+      quantity,
+      category,
+      date: new Date().toLocaleDateString("en-CA").replace(/-/g, "/"),
     };
-    setProducts([...products, newData]);
+    dispatch({ type: productActions.ADD_PRODUCT, payload: newProduct });
     reset();
+    toast.success(`${title} product successfully created`);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+    <form
+      onSubmit={handleSubmit(handleProductSubmission)}
+      className="space-y-8"
+    >
       <TextField
         label="title"
         name="title"
@@ -67,7 +64,7 @@ function CreateProductForm({ products, setProducts, categories }) {
       <RHFSelect
         label="category"
         name="category"
-        options={categories}
+        options={categoriesState.categories}
         register={register}
         required
         errors={errors}

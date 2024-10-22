@@ -17,7 +17,7 @@ function RHFSelect({
         {...register(name, validationSchema)}
         className="textField__input"
       >
-        <option value="">select a category</option>
+        <option value="">select ... </option>
         {options.map((option) => (
           <option key={option.id} value={option.title}>
             {option.title}

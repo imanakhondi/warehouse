@@ -6,16 +6,18 @@ import Modal from "../components/modal/Modal";
 import { useState } from "react";
 import CreateProductForm from "../features/products/components/CreateProductForm";
 import CreateCategoryForm from "../features/products/components/CreateCategoryForm";
+import { useAppContext } from "../context/AppContext";
 
 function ProductsList() {
   const [openCategory, setOpenCategory] = useState(false);
   const [openProduct, setOpenProduct] = useState(false);
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const {
+    state: { filteredProducts },
+  } = useAppContext();
 
   return (
     <AppLayout>
-      <div className="mt-10">
+      <div>
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-2xl font-bold text-primary-900">ProductList</h2>
           <div className="flex gap-x-4">
@@ -32,10 +34,7 @@ function ProductsList() {
               title="Add new category"
               onClose={() => setOpenCategory(false)}
             >
-              <CreateCategoryForm
-                categories={categories}
-                setCategories={setCategories}
-              />
+              <CreateCategoryForm />
             </Modal>
             <Button
               variant="primary"
@@ -50,16 +49,12 @@ function ProductsList() {
               title="Add new Product"
               onClose={() => setOpenProduct(false)}
             >
-              <CreateProductForm
-                products={products}
-                setProducts={setProducts}
-                categories={categories}
-              />
+              <CreateProductForm />
             </Modal>
           </div>
         </div>
         <div className="bg-secondary-900 p-5 rounded-2xl dark:bg-black/30 text-secondary-900 min-h-96">
-          <ProductsTable products={products} />
+          <ProductsTable products={filteredProducts} />
         </div>
       </div>
     </AppLayout>

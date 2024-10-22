@@ -2,8 +2,13 @@ import { useForm } from "react-hook-form";
 import TextareaField from "../../../components/form/TextareaField";
 import TextField from "../../../components/form/TextField";
 import Button from "../../../components/form/Button";
+import { useAppContext } from "../../../context/AppContext";
+import { categoryActions } from "../../../context/AppActions";
+import toast from "react-hot-toast";
 
-function CreateCategoryForm({ categories, setCategories }) {
+function CreateCategoryForm() {
+  const { dispatch } = useAppContext();
+
   const {
     register,
     handleSubmit,
@@ -11,18 +16,22 @@ function CreateCategoryForm({ categories, setCategories }) {
     reset,
   } = useForm();
 
-  const onSubmit = (formData) => {
-    const newData = {
+  const handleCategorySubmission = ({ title, description }) => {
+    const newCategory = {
       id: Date.now(),
-      title: formData.title,
-      description: formData.description,
+      title,
+      description,
     };
-    setCategories([...categories, newData]);
+    dispatch({ type: categoryActions.ADD_CATEGORY, payload: newCategory });
     reset();
+    toast.success(`${title} category successfully created`);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+    <form
+      onSubmit={handleSubmit(handleCategorySubmission)}
+      className="space-y-8"
+    >
       <TextField
         label="title"
         name="title"
