@@ -27,6 +27,7 @@ function App() {
     const itemsToStore = [
       { key: "products", value: productsState.products },
       { key: "categories", value: categoriesState.categories },
+      { key: "darkMode", value: isDarkModeState.isDarkMode },
     ];
 
     itemsToStore.forEach(({ key, value }) => {
@@ -37,7 +38,12 @@ function App() {
       type: filteredProductActions.FILTER_PRODUCT,
       payload: productsState.products,
     });
-  }, [productsState.products, categoriesState.categories, dispatch]);
+  }, [
+    productsState.products,
+    categoriesState.categories,
+    isDarkModeState.isDarkMode,
+    dispatch,
+  ]);
 
   return (
     <>

@@ -15,6 +15,7 @@ function ProductsTable() {
         <th>Row</th>
         <th>Title</th>
         <th>Quantity</th>
+        <th>Price</th>
         <th>Category</th>
         <th>Date</th>
         <th>Operations</th>

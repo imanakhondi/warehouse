@@ -16,6 +16,7 @@ function ProductRow({ product, index }) {
       <td>{index + 1}</td>
       <td>{product.title}</td>
       <td>{product.quantity}</td>
+      <td>{product.price}</td>
       <td>{product.category}</td>
       <td>{product.date}</td>
       <td>

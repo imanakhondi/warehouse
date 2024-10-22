@@ -19,11 +19,12 @@ function CreateProductForm() {
     reset,
   } = useForm();
 
-  const handleProductSubmission = ({ title, quantity, category }) => {
+  const handleProductSubmission = ({ title, quantity, price, category }) => {
     const newProduct = {
       id: Date.now(),
       title,
       quantity,
+      price,
       category,
       date: new Date().toLocaleDateString("en-CA").replace(/-/g, "/"),
     };
@@ -58,6 +59,16 @@ function CreateProductForm() {
         errors={errors}
         validationSchema={{
           required: "quantity is required",
+        }}
+        required
+      />
+      <TextField
+        label="price"
+        name="price"
+        register={register}
+        errors={errors}
+        validationSchema={{
+          required: "price is required",
         }}
         required
       />
