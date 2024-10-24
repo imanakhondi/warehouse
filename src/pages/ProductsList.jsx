@@ -10,6 +10,7 @@ import { useAppContext } from "../context/AppContext";
 import FilterProducts from "../features/products/components/FilterProducts";
 import SideDrawerModal from "../components/modal/SideDrawerModal";
 import { HiFilter } from "react-icons/hi";
+import Breadcrumb from "../components/ui/Breadcrumb";
 
 function ProductsList() {
   const [openCategory, setOpenCategory] = useState(false);
@@ -22,6 +23,9 @@ function ProductsList() {
   return (
     <AppLayout>
       <div>
+        <div className="mb-5 text-black/80 dark:text-white/90 text-left">
+          <Breadcrumb />
+        </div>
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-2xl font-bold text-primary-900">ProductList</h2>
           <div className="flex gap-x-4">

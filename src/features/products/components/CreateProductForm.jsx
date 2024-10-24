@@ -1,85 +1,42 @@
-import { useForm } from "react-hook-form";
 import TextField from "../../../components/form/TextField";
 import Button from "../../../components/form/Button";
 import RHFSelect from "../../../components/form/RHFSelect";
-import { useAppContext } from "../../../context/AppContext";
-import { productActions } from "../../../context/AppActions";
-import toast from "react-hot-toast";
+import useCreateProduct from "../hooks/useCreateProduct";
 
 function CreateProductForm() {
-  const {
-    state: { categoriesState },
-    dispatch,
-  } = useAppContext();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-
-  const handleProductSubmission = ({ title, quantity, price, category }) => {
-    const newProduct = {
-      id: Date.now(),
-      title,
-      quantity,
-      price,
-      category,
-      date: new Date().toLocaleDateString("en-CA").replace(/-/g, "/"),
-    };
-    dispatch({ type: productActions.ADD_PRODUCT, payload: newProduct });
-    reset();
-    toast.success(`${title} product successfully created`);
-  };
+  const product = useCreateProduct();
 
   return (
     <form
-      onSubmit={handleSubmit(handleProductSubmission)}
+      onSubmit={product.handleSubmit(product.handleProductSubmission)}
       className="space-y-8"
     >
       <TextField
         label="title"
         name="title"
-        register={register}
-        errors={errors}
-        validationSchema={{
-          required: "title is required",
-          minLength: {
-            value: 3,
-            message: "Invalid title length",
-          },
-        }}
-        required
+        register={product.register}
+        errors={product.errors}
       />
       <TextField
         label="quantity"
         name="quantity"
-        register={register}
-        errors={errors}
-        validationSchema={{
-          required: "quantity is required",
-        }}
-        required
+        type="number"
+        register={product.register}
+        errors={product.errors}
       />
       <TextField
         label="price"
         name="price"
-        register={register}
-        errors={errors}
-        validationSchema={{
-          required: "price is required",
-        }}
-        required
+        type="number"
+        register={product.register}
+        errors={product.errors}
       />
       <RHFSelect
         label="category"
         name="category"
-        options={categoriesState.categories}
-        register={register}
-        required
-        errors={errors}
-        validationSchema={{ required: "Category is required" }}
+        options={product.categoriesState.categories}
+        register={product.register}
+        errors={product.errors}
       />
       <Button className="w-full"> Submit</Button>
     </form>

@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import SingleProduct from "./pages/SingleProduct";
 import { filteredProductActions } from "./context/AppActions";
 import { Toaster } from "react-hot-toast";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const {
@@ -49,8 +50,9 @@ function App() {
     <>
       <Toaster />
       <Routes>
-        <Route path="/" element={<ProductsList />} />
-        <Route path="products/:id" element={<SingleProduct />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="products" element={<ProductsList />} />
+        <Route path="products/:slug" element={<SingleProduct />} />
       </Routes>
     </>
   );

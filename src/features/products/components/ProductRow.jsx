@@ -41,7 +41,7 @@ function ProductRow({ product, index }) {
               }}
             />
           </Modal>
-          <Link to={`products/${product.id}`} className="flex justify-center">
+          <Link to={`${product.slug}`} className="flex justify-center">
             <HiEye className="w-5 h-5 text-primary-900" />
           </Link>
         </div>

@@ -1,9 +1,7 @@
-import { useForm } from "react-hook-form";
 import TextField from "../../../components/form/TextField";
 import Button from "../../../components/form/Button";
-import { useAppContext } from "../../../context/AppContext";
-import { filteredProductActions } from "../../../context/AppActions";
 import RHFSelect from "../../../components/form/RHFSelect";
+import useFilterProducts from "../hooks/useFilterProduct";
 
 const sortOptions = [
   { id: 1, title: "latest" },
@@ -11,49 +9,33 @@ const sortOptions = [
 ];
 
 function FilterProducts({ onClose }) {
-  const {
-    state: { categoriesState },
-    dispatch,
-  } = useAppContext();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-
-  const handleFilterSubmit = ({ title, category, sortOrder }) => {
-    dispatch({
-      type: filteredProductActions.FILTER_PRODUCT,
-      payload: { title, category, sortOrder },
-    });
-    onClose();
-    reset();
-  };
+  const filterProduct = useFilterProducts(onClose);
 
   return (
     <div>
-      <form onSubmit={handleSubmit(handleFilterSubmit)} className="space-y-8">
+      <form
+        onSubmit={filterProduct.handleSubmit(filterProduct.handleFilterSubmit)}
+        className="space-y-8"
+      >
         <TextField
           label="title"
           name="title"
-          register={register}
-          errors={errors}
+          register={filterProduct.register}
+          errors={filterProduct.errors}
         />
         <RHFSelect
           label="category"
           name="category"
-          options={categoriesState.categories}
-          register={register}
-          errors={errors}
+          options={filterProduct.categoriesState.categories}
+          register={filterProduct.register}
+          errors={filterProduct.errors}
         />
         <RHFSelect
           label="sortOrder"
           name="sortOrder"
           options={sortOptions}
-          register={register}
-          errors={errors}
+          register={filterProduct.register}
+          errors={filterProduct.errors}
         />
         <Button className="w-full"> Filter</Button>
       </form>

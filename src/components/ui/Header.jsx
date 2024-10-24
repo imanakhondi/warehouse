@@ -1,5 +1,4 @@
 import { HiFilter, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
-import { useState } from "react";
 import { useAppContext } from "../../context/AppContext";
 import { darkModActions } from "../../context/AppActions";
 
